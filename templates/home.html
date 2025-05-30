@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Indian States Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            /* The background image plus gradient overlay */
+            background: 
+                linear-gradient(135deg, #e0eafc99, #cfdef399), /* semi-transparent gradient */
+                url("{{ url_for('static', filename='images/bg.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: overlay;
+        }
+        .state-card {
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .state-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #b6ccfe;
+        }
+        .states-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        /* Optional: add a subtle drop shadow to the content for better contrast */
+        .container {
+            text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="my-5 fw-bold">🌏 Indian States Blog</h1>
+        <div class="states-grid">
+            {% for state, info in states.items() %}
+            <div class="card state-card" style="width: 18rem;" onclick="gotoState('{{ state|replace(' ', '-')|lower }}')">
+                <img src="{{ url_for('static', filename='images/' + info.image) }}" class="card-img-top" alt="{{ state }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ state }}</h5>
+                    <a href="{{ url_for('state_page', name=state|replace(' ', '-')|lower) }}" class="btn btn-primary">Explore</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function gotoState(state) {
+            const card = event.currentTarget;
+            card.style.opacity = 0;
+            setTimeout(() => {
+                window.location.href = "/state/" + state;
+            }, 200);
+        }
+    </script>
+</body>
+</html>
