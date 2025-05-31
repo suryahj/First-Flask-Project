@@ -39,5 +39,5 @@ def state_page(name):
     return render_template("state.html", name=name, description=state["description"], image=state["image"])
 
 #main code segment
-if __name__ == "__main__":
+if __name__ == "__main__"
     app.run(debug=True)
