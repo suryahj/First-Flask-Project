@@ -24,7 +24,7 @@
 </head>
 <body>
     <div class="container text-center">
-        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary my-4">&larr; Back to Home</a>
+        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary my-4" style="background-color: aqua;">&larr; Back to Home</a>
         <h1 class="display-4 fw-bold mb-4">{{ name }}</h1>
         <img src="{{ url_for('static', filename='images/' + image) }}" class="state-image" alt="{{ name }}">
         <div class="lead fs-4">{{ description }}</div>
